@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+    <h1> Check the current weather</h1>
+    <form action="/" method="post">
+        <input type="text" name="cityname" placeholder="City" required>
+        <input type="text" name="country" placeholder="Country">
+        <button type="submit">Submit</button><br>
+    </form>
+    <button  class="usethislocation">use current location</button>
+    <div class="weather"></div>
+    <script>
+        const button = document.querySelector('.usethislocation');
+        button.addEventListener('click', () => {
+        if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            console.log('Latitude:', latitude, 'Longitude:', longitude);
+            sendLocationData(latitude, longitude);
+            
+        }, error => {
+            console.error('Error getting location:', error.message);
+        });
+    } else {
+        console.error('Geolocation is not supported by this browser.');
+    }
+    });
+
+    function sendLocationData(latitude, longitude) {
+    fetch('/location', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ latitude: latitude, longitude: longitude })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to send location data to server');
+        }
+        return response.json();
+    })
+    .then((data) => {
+    console.log('Received data:', data);
+    const main = data.weather[0].main;
+    const cityName = data.name;
+    const temperature = data.main.temp;
+    const imgCode=data.weather[0].icon;
+    document.querySelector(".weather").innerHTML = `<h3>City :  ${cityName} <br> Weather : ${main} <br> temperature: ${temperature}°C <img src='https://openweathermap.org/img/wn/${imgCode}@2x.png' class='weatherimg'></h3>`;
+    })
+    .catch(error => {
+        console.log('Error:', error);
+    });
+}
+    </script>
+    </div>
+</body>
+</html>

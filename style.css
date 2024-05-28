@@ -1,0 +1,49 @@
+body{
+    background-image: url(https://c1.wallpaperflare.com/preview/432/753/232/rain-weather-precipitation-raindrops.jpg);
+    background-size: cover;
+    
+}
+input{
+    display: block;
+    width: 65%;
+    margin: 5px auto;
+    border-radius: 100px;
+    border: solid 1px;;
+    border-color: rgb(40, 95, 26);
+    text-align: center;
+    color:rgb(37, 165, 5) ;
+}
+button{
+    width: 35%;
+    margin: 5px;
+    background-color: rgb(37, 165, 5);
+    border: solid 1px rgb(40, 95, 26);
+    color: aliceblue;
+    padding: 5px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+h1{
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    text-shadow: 10px 5px 10px black;
+    text-indent: 10px;
+}
+.container{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    border: solid 3px rgb(255, 251, 0);
+    margin: 10% 30%;
+    border-radius: 50px;
+    padding: 20px;
+    backdrop-filter: blur(8px);
+}
+.weatherimg{
+    display: block;
+    margin: auto;
+
+}
+.weather{
+    color:white;
+}
